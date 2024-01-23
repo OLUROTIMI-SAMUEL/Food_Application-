@@ -12,6 +12,8 @@ namespace SammyFood.Data.Models
 
         public int Id { get; set; }
         [Required]
+        [MaxLength(200)]
+        [MinLength(2)]
         public string Name { get; set; }
 
         [Display(Name = "Type Of Food In Different Country")]
@@ -27,3 +29,6 @@ namespace SammyFood.Data.Models
 
 //The proccess of mapping an incoming URL e.g "https://localhost:44379/Home/Contact" to a piece of software is
 // called ROUTING which tells our ASP .NET how to fing a piece of software that can respond to a given URL 
+
+//The "UNIT OF WORK" helps us to record what changes we want to apply to a database i.e what things do we want to
+//ADD, DELETE, UPDATE  

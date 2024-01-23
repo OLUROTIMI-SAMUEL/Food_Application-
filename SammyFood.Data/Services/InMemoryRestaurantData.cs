@@ -28,10 +28,19 @@ namespace SammyFood.Data.Services
             restaurant.Id = restaurants.Max(x => x.Id) + 1;
         }
 
+        public void Delete(int id)
+        {
+            var restaurant = Get(id);
+            if (restaurant != null)
+            {
+                restaurants.Remove(restaurant);
+            }
+        }
+
         public Restaurant Get(int id)
         {
             return restaurants.FirstOrDefault(r => r.Id == id);
-        }
+        }   
 
         public IEnumerable<Restaurant> GetAll()
         {
@@ -49,7 +58,7 @@ namespace SammyFood.Data.Services
             if(existing != null)
             {
                 existing.Name = restaurant.Name;
-                existing.Cuisine = restaurant.Cuisine;
+                existing.Cuisine = restaurant.Cuisine;  
             }
 
         }

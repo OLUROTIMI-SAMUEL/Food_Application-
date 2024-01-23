@@ -19,13 +19,19 @@ namespace SammyFood.Web.App_Start
             var builder = new ContainerBuilder();
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
+
             builder.RegisterApiControllers(typeof(MvcApplication).Assembly);
 
-            builder.RegisterType<InMemoryRestaurantData>().As<IRestaurantData>().SingleInstance();
+            //  builder.RegisterType<InMemoryRestaurantData>().As<IRestaurantData>().SingleInstance();
+
+            builder.RegisterType<SqlRestaurantData>().As<IRestaurantData>().InstancePerRequest();
+
+            builder.RegisterType<SammyFoodDbContext>().InstancePerRequest();
 
             var container = builder.Build();
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
             httpConfiguration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
     }
